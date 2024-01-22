@@ -13,6 +13,11 @@ const openai = new OpenAI({
     apiKey: process.env.API_KEY,
 });
 
+app.post('/test', async (req, res) => {
+    const { fakePrompt } = req.body;
+    res.send("Fake Prompt: " + fakePrompt);
+});
+
 app.post('/chat', async (req, res) => {
     const { prompt } = req.body;
 
@@ -45,7 +50,7 @@ app.get('/res', async (req, res) => {
       }
 });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Listening on port ${port} successfully.`)
 });
