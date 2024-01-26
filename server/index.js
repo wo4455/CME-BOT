@@ -5,7 +5,9 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); 
+app.use(express.json());
 
 const { OpenAI } = require('openai');
 
@@ -13,10 +15,10 @@ const openai = new OpenAI({
     apiKey: process.env.API_KEY,
 });
 
-app.post('/test', async (req, res) => {
-    const { fakePrompt } = req.body;
-    res.send("Fake Prompt: " + fakePrompt);
-});
+// app.post('/test', async (req, res) => { // doesnt work 
+//     const fakePrompt = req.body.prompt;
+//     res.send("Fake Prompt: " + fakePrompt);
+// });
 
 app.post('/chat', async (req, res) => {
     const { prompt } = req.body;
