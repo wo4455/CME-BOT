@@ -25,11 +25,11 @@ app.get('/res', async (req, res) => {
 
     try {
       const stream = await openai.chat.completions.create({
-        model: 'gpt-4-0125-preview', // gpt-3.5-turbo-1106
+        // model: 'gpt-4-0125-preview',
+        model: 'gpt-3.5-turbo-1106',
         messages: conversation,
         stream: true,
-        temperature: 1,
-        max_tokens: 16
+        temperature: 1
       });
       for await (const chunk of stream) {
         if (!chunk.choices[0].delta.content) continue;
