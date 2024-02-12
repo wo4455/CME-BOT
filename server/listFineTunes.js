@@ -1,7 +1,7 @@
 import openai from './index.js';
 
 // File ID: ftjob-GXLRb8UCJkWO8ah8iao6ttWa
-// Full Model: ft:gpt-3.5-turbo-1106:personal::8q2gfWF4
+// Model ID: ft:gpt-3.5-turbo-1106:personal::8q2gfWF4
 
 // List Fine-Tuning Job(s)
 const listFineTunes = async () => {
