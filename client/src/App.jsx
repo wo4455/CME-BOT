@@ -1,33 +1,50 @@
 import React from 'react';
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 const App = () => {
+  const [input, setInput] = useState("");
   const [gptResponse, setGptResponse] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/res', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ userMessage: 'Talk to me about CME CF Cryptocurrency Benchmarks.' }), // Adjust the prompt as needed
-    })
-    .then((res) => res.json())
-    .then((data) => setGptResponse(data))
-    .catch((err) => console.log(err));
-  }, [gptResponse]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!input) throw new Error("Prompt is required. Say something!");
+    setIsLoading(true);
+    try { 
+      const response = await fetch('http://localhost:3000/res', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userMessage: input }),
+      });
+      const data = await response.json(); // gets response from json format (set from backend)
+      setGptResponse(data);
+    } catch (err) {
+      console.error("Error fetching data: ", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  }
 
   return (
     <div>
-      {(gptResponse === "") ? (
+      {isLoading ? (
         <h1 className='p-5'>Loading...</h1>
-      ):
-      <h1 className='p-5'>{gptResponse}</h1> }
-      
+      ) : gptResponse ? (
+        <h1 className='p-5'>{gptResponse}</h1>
+      ) : null}
+
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder='type here...' value={input} onChange={handleChange} />
+        <button type="submit">Submit</button>
+      </form>
     </div>
-    
   )
 };
 
