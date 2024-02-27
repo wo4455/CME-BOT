@@ -6,6 +6,10 @@
   /* background-color: #EFF0EA; */
 }
 
+body {
+  background-color: #F5F5F5;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

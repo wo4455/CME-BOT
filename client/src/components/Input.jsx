@@ -37,21 +37,26 @@ const Input = () => {
 
   const handleChange = (e) => {
     setInput(e.target.value);
-  }
+  };
 
   return (
-    <div>
-        {/* {isLoading ? (
-          <h1 className='p-5'>Loading...</h1>
-        ) : gptResponse ? (
-          <h1 className='p-5'>{gptResponse}</h1>
-        ) : null} */}
-
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder='type here...' value={input} onChange={handleChange} />
-          <button type="submit">Submit</button>
-        </form>
+    <div className='w-2/3 h-24 m-auto drop-shadow-lg overflow-y-auto'>
+      <form className='w-full h-full flex items-center' onSubmit={handleSubmit}>
+        <input 
+          className='flex-grow h-20 p-3 rounded-l-md min-h-18 font-[Poppins] text-lg'
+          type="text" 
+          placeholder='Type here...' 
+          value={input} 
+          onChange={handleChange} 
+        />
+        <button 
+          className='h-20 px-10 hover:opacity-90 rounded-r-md bg-ltBlue text-dkBlue font-[Poppins] text-lg font-semibold'
+          type="submit">
+            SUBMIT
+        </button>
+      </form>
     </div>
+
   );
 };
 
