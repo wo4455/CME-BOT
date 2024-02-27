@@ -2,17 +2,18 @@ import React from 'react'
 import { useState } from 'react';
 
 import { useMessagesContext } from '../context/MessagesContext';
+import { useLoadingContext } from '../context/LoadingContext';
 
 const Input = () => {
   const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const { setMessages } = useMessagesContext();
+  const { setLoading } = useLoadingContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input) throw new Error("Prompt is required. Say something!");
-    setIsLoading(true);
+    setLoading(true);
     try { 
       const response = await fetch('http://localhost:3000/res', {
         method: 'POST',
@@ -30,7 +31,7 @@ const Input = () => {
     } catch (err) {
       console.error("Error fetching data: ", err);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 

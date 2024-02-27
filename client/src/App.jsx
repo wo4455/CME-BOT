@@ -5,16 +5,19 @@ import Header from './components/Header';
 import Display from './components/Display';
 import Input from './components/Input';
 import { MessagesProvider } from './context/MessagesContext';
+import { LoadingProvider } from './context/LoadingContext';
 
 const App = () => {
   return (
     <>
       <Header />
       <MessagesProvider>
-        <div>
-          <Display />
-          <Input />
-        </div>
+        <LoadingProvider> 
+          <div>
+            <Display />
+            <Input />
+          </div>
+        </LoadingProvider>
       </MessagesProvider>
     </>
   );
