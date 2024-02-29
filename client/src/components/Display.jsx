@@ -29,7 +29,7 @@ const Display = () => { // get message objects (input and output) from Input.jsx
     };
 
     return (
-        <div className='z-10 my-10 top-36 left-60 flex flex-col w-2/3 h-96 m-auto py-3 px-6 bg-white rounded-md overflow-y-auto'>
+        <div className='z-10 my-10 top-36 left-60 flex flex-col w-2/3 h-96 m-auto py-3 px-6 bg-white rounded-md drop-shadow-lg overflow-y-auto'>
             { messagesList.map((item, index) => (
                 <div key={index} className={`animate__animated animate__fadeInUp animate__faster ${index === messagesList.length - 1 ? 'animate__delay-1s' : ''}`}>
                     <Message message={item} isLoading={isLoading}/>

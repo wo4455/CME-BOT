@@ -6,6 +6,7 @@ import { useLoadingContext } from '../context/LoadingContext';
 
 const Input = () => {
   const [input, setInput] = useState("");
+  const [conversationHistory, setConversationHistory] = useState([]); 
 
   const { setMessages } = useMessagesContext();
   const { setLoading } = useLoadingContext();
@@ -20,12 +21,20 @@ const Input = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userMessage: input }),
+        body: JSON.stringify({ 
+          userMessage: input,
+          conversationHistory: conversationHistory
+        }),
       });
       const data = await response.json(); // gets response from json format (set from backend)
-      setMessages([
+      setMessages([ // sets for context --> to be passed to display.jsx
         { text: input, ai: false },
         { text: data, ai: true }
+      ]);
+      setConversationHistory([ // sets local state --> to be passed to backend for memory
+        ...conversationHistory,
+        { role: 'user', content: input },
+        { role: 'assistant', content: data }
       ]);
       setInput('');
     } catch (err) {
