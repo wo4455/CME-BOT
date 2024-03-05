@@ -16,7 +16,7 @@ const Input = () => {
     if (!input) throw new Error("Prompt is required. Say something!");
     setLoading(true);
     try { 
-      const response = await fetch('http://localhost:3000/res', {
+      const response = await fetch('http://localhost:3000/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

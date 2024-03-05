@@ -1,4 +1,4 @@
-import openai from './index.js';
+import openai from '../index.js';
 
 // File ID: ftjob-GXLRb8UCJkWO8ah8iao6ttWa
 // Model ID: ft:gpt-3.5-turbo-1106:personal::8q2gfWF4

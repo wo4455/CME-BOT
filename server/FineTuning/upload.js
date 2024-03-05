@@ -1,5 +1,5 @@
 import fs from 'fs';
-import openai from './index.js';
+import openai from '../index.js';
 
 const upload = async () => {
     try {

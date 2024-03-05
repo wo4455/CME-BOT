@@ -1,4 +1,4 @@
-import openai from './index.js';
+import openai from '../index.js';
 
 const createFineTune = async () => {
     try {
