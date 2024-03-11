@@ -5,13 +5,11 @@ import { useState } from 'react';
 import cmeLogo  from '../assets/cmebot_logo.png';
 import Header from '../components/Header';
 import { Link, useNavigate } from 'react-router-dom';
-import { useInfoContext } from '../context/InfoContext';
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { setInfo } = useInfoContext();
 
   const navigate = useNavigate();
 
@@ -29,30 +27,33 @@ const Login = () => {
           password: password,
         }),
       });
-
-      console.log(response);
-      
-      // // const token = response.headers.get('X-Auth-Token');
-      response.headers.forEach((value, name) => {
-        console.log(`${name}: ${value}`);
+      const token = response.headers.get('X-Auth-Token');
+      onLogin({
+        username: username,
+        token: token
       });
-      // // setInfo([username, token]);
+
       setUsername('');
       setPassword('');
-      // // console.log('Login successful');
-      // if (!response.ok) {
-      //   setError(response.text);
-      // };
+      if (!response.ok) {
+        try {
+          const errorMessage = await response.json();
+          setError(errorMessage);
+        } catch (err) {
+          setError('Failed to login. Please try again later.');
+        };
+      } else {
+        navigate('/');
+      };
     } catch (error) {
       console.error(error);
       // Handle error appropriately
     };
-    navigate('/');
   };
 
   return (
     <>
-      <Header />
+      <Header userData={{}} deactivate />
       <section className="flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
         <div className="md:3/4 max-w-sm">
           <img

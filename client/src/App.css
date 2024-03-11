@@ -45,3 +45,14 @@ body {
 .read-the-docs {
   color: #888;
 }
+
+.check-mark {
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.check-mark.show {
+  opacity: 1;
+  transform: scale(1);
+}

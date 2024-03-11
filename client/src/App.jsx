@@ -1,26 +1,24 @@
 import React from 'react';
 import './App.css';
-
 import Header from './components/Header';
 import Display from './components/Display';
 import Input from './components/Input';
 import { MessagesProvider } from './context/MessagesContext';
 import { LoadingProvider } from './context/LoadingContext';
-import { InfoProvider } from './context/InfoContext';
 
-const App = () => {
+const App = ({ userData, onLogout }) => {
   return (
-    <InfoProvider>
-      <Header />
+    <>
+      <Header userData={userData} onLogout={onLogout} />
       <MessagesProvider>
         <LoadingProvider> 
             <div>
-              <Display />
+              <Display userData={userData} />
               <Input />
             </div>
         </LoadingProvider>
       </MessagesProvider>
-    </InfoProvider>
+    </>
   );
 };
 

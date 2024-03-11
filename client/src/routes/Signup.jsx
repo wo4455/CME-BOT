@@ -5,13 +5,11 @@ import { useState } from 'react';
 import cmeLogo  from '../assets/cmebot_logo.png';
 import Header from '../components/Header';
 import { Link, useNavigate } from 'react-router-dom';
-import { useInfoContext } from '../context/InfoContext';
 
-const Signup = () => {
+const Signup = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { setInfo } = useInfoContext();
 
   const navigate = useNavigate();
 
@@ -29,23 +27,33 @@ const Signup = () => {
           password: password,
         })
       });
-      // const token = response.headers.get('x-auth-token');
-      // setInfo([username, token]);
+      const token = response.headers.get('X-Auth-Token');
+      onLogin({
+        username: username,
+        token: token
+      });
+
       setUsername('');
       setPassword('');
       if (!response.ok) {
-        setError(response.text);
+        try {
+          const errorMessage = await response.json();
+          setError(errorMessage);
+        } catch (err) {
+          setError('Failed to signup. Please try again later.');
+        };
+      } else {
+        navigate('/');
       };
-    } catch (error) {
-      setError(error);
-      console.log(error);
-    }
-    navigate('/');
+    } catch (err) {
+      setError(err);
+      console.log(err);
+    };
   };
 
   return (
     <>
-      <Header />
+      <Header userData={{}} deactivate />
       <section className="flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
         <div className="md:3/4 max-w-sm">
           <img

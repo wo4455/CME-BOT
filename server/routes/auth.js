@@ -1,6 +1,5 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import mongoose from 'mongoose';
 import Joi from 'joi';
 import { User } from '../Models/User.js';
 
@@ -20,7 +19,8 @@ router.post('/', async (req, res) => {
     if (!validPassword) return res.status(400).send("Invalid username or password");
 
     const token = user.generateAuthToken();
-    res.header('x-auth-token', token).send('Login Successful');  
+    res.setHeader('Access-Control-Expose-Headers', 'X-Auth-Token');
+    res.setHeader('X-Auth-Token', token).status(200).send('Login Successful');  
 });
 
 function validate(req) {
