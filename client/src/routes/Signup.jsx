@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BiLogoFacebook } from "react-icons/bi";
-import { useState } from 'react';
-import cmeLogo  from '../assets/cmebot_logo.png';
-import Header from '../components/Header';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import cmeLogo from "../assets/cmebot_logo.png";
+import Header from "../components/Header";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -17,38 +17,38 @@ const Signup = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/new', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/new", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           username: username,
           password: password,
-        })
+        }),
       });
-      const token = response.headers.get('X-Auth-Token');
+      const token = response.headers.get("X-Auth-Token");
       onLogin({
         username: username,
-        token: token
+        token: token,
       });
 
-      setUsername('');
-      setPassword('');
+      setUsername("");
+      setPassword("");
       if (!response.ok) {
         try {
           const errorMessage = await response.json();
           setError(errorMessage);
         } catch (err) {
-          setError('Failed to signup. Please try again later.');
-        };
+          setError("Failed to signup. Please try again later.");
+        }
       } else {
-        navigate('/');
-      };
+        navigate("/");
+      }
     } catch (err) {
       setError(err);
       console.log(err);
-    };
+    }
   };
 
   return (
@@ -56,10 +56,7 @@ const Signup = ({ onLogin }) => {
       <Header userData={{}} deactivate />
       <section className="flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
         <div className="md:3/4 max-w-sm">
-          <img
-            src={cmeLogo}
-            alt="Sample image"
-          />
+          <img src={cmeLogo} alt="Sample image" />
         </div>
         <form onSubmit={handleSubmit} className="md:w-1/3 max-w-sm">
           <div className="text-center md:text-left">
@@ -88,18 +85,20 @@ const Signup = ({ onLogin }) => {
               Or
             </p>
           </div>
-          <input onChange={e => setUsername(e.target.value)}
+          <input
+            onChange={(e) => setUsername(e.target.value)}
             className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded"
             type="text"
             placeholder="Username"
           />
-          <input onChange={e => setPassword(e.target.value)}
+          <input
+            onChange={(e) => setPassword(e.target.value)}
             className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4"
             type="password"
             placeholder="Password"
           />
           {error ? (
-            <p className='text-red-500 mt-2 text-left'>{error}</p>
+            <p className="text-red-500 mt-2 text-left">{error}</p>
           ) : null}
           <div className="mt-4 flex justify-between font-semibold text-sm">
             <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
@@ -119,7 +118,7 @@ const Signup = ({ onLogin }) => {
             Already have an account?{" "}
             <Link
               className="text-red-600 hover:underline hover:underline-offset-4"
-              to={'/auth'}
+              to={"/auth"}
             >
               Login
             </Link>
@@ -129,6 +128,5 @@ const Signup = ({ onLogin }) => {
     </>
   );
 };
-
 
 export default Signup;
