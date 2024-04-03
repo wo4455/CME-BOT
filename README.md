@@ -14,7 +14,6 @@ CME Bot simplifies the navigation and understanding of derivative trading on the
 ### Prerequisites
 
 - Node.js
-- npm (Node Package Manager)
 
 ### Installation and Usage
 
