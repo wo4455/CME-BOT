@@ -22,27 +22,33 @@ CME Bot simplifies the navigation and understanding of derivative trading on the
    git clone https://github.com/wo4455/CME-BOT.git
    ```
 
-3. Navigate to the project directory
+2. Navigate to the project directory
    ```
    cd CME-BOT
    ```
 
-5. Navigate to the server and client folders simultaneously (separate terminal windows) and install dependencies on both.
+3. Navigate to the server and client folders simultaneously (separate terminal windows) and install dependencies on both.
    ```
    npm install
    ```
 
-7. Start the backend server in /server
+4. Inside the server folder, create a new file named '.env' and define two variables
+   ```
+   API_KEY=*your ChatGPT api key*
+   MONGODB_URI=*connection link to database*
+   ```
+
+5. Start the backend server in /server
    ```
    npm start
    ```
 
-9. Start the frontend server in /client
+6. Start the frontend server in /client
    ```
    npm run dev
    ```
 
-11. Visit: ```http://http://localhost:5173/```
+7. Visit: ```http://localhost:5173/```
 
 ### Usage
 
@@ -50,7 +56,7 @@ Once on the site, ask any CME Group-related question, and the bot will provide a
 
 ## Authors
 
-- **Will Otwell** - *Initial Work* - [wo4455](https://github.com/wo4455)
+- **Will Otwell** - [wo4455](https://github.com/wo4455)
 
 ### License
 
