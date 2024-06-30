@@ -30,6 +30,8 @@
     "mongodb": "^6.4.0",
     "mongoose": "^8.2.0",
     "openai": "^4.24.7",
+    "path": "^0.12.7",
+    "url": "^0.11.3",
     "winston": "^3.11.0",
     "winston-mongodb": "^5.1.1"
   }
